@@ -3,8 +3,6 @@ import mongoose from "mongoose";
 const connectDatabase = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URL, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
       retryWrites: true, w: 'majority', dbName: 'soutout'
     });
 
