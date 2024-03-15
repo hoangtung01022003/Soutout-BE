@@ -8,6 +8,8 @@ const connectDatabase = async () => {
       retryWrites: true, w: 'majority', dbName: 'soutout'
     });
 
+    mongoose.set('strictQuery', true)
+
     console.log(`MongoDB Connected`);
   } catch (error) {
     console.error(`Error: ${error.message}`);
