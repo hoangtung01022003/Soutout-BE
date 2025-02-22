@@ -14,6 +14,7 @@ import categoryRouter from "./Routes/categoryRoutes.js";
 dotenv.config();
 connectDatabase();
 const app = express();
+
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -21,11 +22,18 @@ app.use(
   })
 );
 app.use(bodyParser.json({ limit: "50mb" }));
-app.use(cors());
+
+// Cấu hình CORS
+const corsOptions = {
+  origin: 'https://soutout-fe.onrender.com', // Chỉ cho phép nguồn này
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+app.use(cors(corsOptions));
+
 app.use(express.static("public"));
 
 // API
-
 app.use("/api/pdf", pdfRoutes);
 app.use("/api/import", ImportData);
 app.use("/api/products", productRoute);
